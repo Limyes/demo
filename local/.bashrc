@@ -1,0 +1,1 @@
+export PATH="/e/local/:$PATH"
