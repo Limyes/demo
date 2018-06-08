@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<script src="./js/jquery.min.js"></script>
+	<style>
+		.demobox{width:300px;height:200px;overflow: hidden;margin:auto;}
+		.images{transition:all 0.5s;display:flex;align-items:flex-start;}
+		.images img{width:300px;height:200px;}
+		.buttons{width:300px;margin:auto;}
+		.red{color:red;}
+	</style>
+</head>
+<body>
+	<div class="demobox">
+		<div class="images" id="images">
+			<img src="img/major_img.jpg" alt="图片1"/>
+			<img src="img/major_img.jpg" alt="图片2"/>
+			<img src="img/major_img.jpg" alt="图片3"/>
+			<img src="img/major_img.jpg" alt="图片4"/>
+			<img src="img/major_img.jpg" alt="图片5"/>
+		</div>
+	</div>
+	<div class="buttons" id="buttons">
+		<button>第1张</button>
+		<button>第2张</button>
+		<button>第3张</button>
+		<button>第4张</button>
+		<button>第5张</button>
+	</div>
+	<script>
+		var buttons=$(".buttons button")
+		for(var i=0;i<buttons.length;i++){
+			$(buttons[i]).on('click',function(x){
+				var currindex=$(x.currentTarget).index();
+				var marginleft=currindex*-300;
+				$('#images').css({transform:'translate('+marginleft+'px)'});
+				buttons.eq(currindex).addClass('red').siblings('.red').removeClass('red');
+			})
+		}
+		var n=0;
+		var arrlength=buttons.length;
+		buttons.eq(n%arrlength).trigger('click');
+		var timer=setTimer();
+		$('.demobox').on('mouseenter',function(){
+			window.clearInterval(timer);
+		})
+		$('.demobox').on('mouseleave',function(){
+			timer=setTimer();
+		})
+		function setTimer(){	
+			return setInterval(()=>{
+				n++;
+				buttons.eq(n%arrlength).trigger('click');
+			},1000);
+		}
+	</script>
+</body>
+</html>
