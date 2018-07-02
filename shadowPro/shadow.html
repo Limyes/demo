@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  <title>遮罩冒泡</title>
+  <script src="./jquery-3.2.1.min.js"></script>
+  <style>
+    .container{
+      position: relative;
+      display: inline-block;
+    }
+    .shadow{
+      border: 1px solid red;
+      position: absolute;
+      left: 100%;
+      top: 0;
+      white-space: nowrap;
+      padding: 10px;
+      margin-left: 10px;
+      background: white;
+      display: none;
+    }
+    .shadow::before{
+      position: absolute;
+      right: 100%;
+      top: 5px;
+      border: 10px solid transparent;
+      border-right-color: red;
+      content: '';
+    }
+    .shadow::after{
+      position: absolute;
+      right: 100%;
+      top: 5px;
+      border: 10px solid transparent;
+      border-right-color: white;
+      content: '';
+      margin-right: -1px;
+    }
+  </style>
+</head>
+<body>
+  <div id="container" class="container">
+    <button id="clickMe">点我</button>
+    <div id="shadow" class="shadow">
+      <input type="checkbox">这是浮层
+    </div>
+  </div> 
+  <script>
+    var counter=0;
+    $('#clickMe').on('click',function(){
+      if(counter===0){
+        $('#shadow').show();
+        setTimeout(function(){
+          $(document).one('click',function(){
+            $('#shadow').hide();
+          })
+        },0)
+        counter=1;
+      }else{
+        $('#shadow').hide();
+        counter=0;
+      }
+      
+    })
+    $('#shadow').on('click',function(e){
+      e.stopPropagation();
+    })
+  </script>
+</body>
+</html>
