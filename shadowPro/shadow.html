@@ -49,19 +49,16 @@
   <script>
     var counter=0;
     $('#clickMe').on('click',function(){
-      if(counter===0){
+      if($('#shadow').is(':hidden')){
         $('#shadow').show();
         setTimeout(function(){
           $(document).one('click',function(){
             $('#shadow').hide();
           })
         },0)
-        counter=1;
       }else{
         $('#shadow').hide();
-        counter=0;
       }
-      
     })
     $('#shadow').on('click',function(e){
       e.stopPropagation();
