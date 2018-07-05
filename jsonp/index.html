@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>测试用例</title>
+</head>
+<body>
+	<div>
+		当前余额<span id="amount">&&&amount&&&</span>
+	</div>
+	<button id="button">打钱</button>
+	<script>
+		window.showData=function(redata){
+			console.log(`${redata}`)
+		}
+		button.addEventListener('click',function(e){
+			let scriptTag=document.createElement('script')
+			scriptTag.src='http://jack.com:8002/pay?callback=showData'
+			document.body.appendChild(scriptTag)
+			scriptTag.onload=function(e){
+				console.log('success!')
+				e.currentTarget.remove()	
+			}
+			scriptTag.onerror=function(e){
+				console.log('failed...')
+				e.currentTarget.remove()	
+			}
+		})
+	</script>
+</body>
+</html>
