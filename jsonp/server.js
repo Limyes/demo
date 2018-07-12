@@ -53,7 +53,6 @@ var server = http.createServer(function(request, response){
     response.write('失败了！')
     response.end()
   }
-
   /******** 代码结束，下面不要看 ************/
 })
 
